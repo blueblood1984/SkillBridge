@@ -20,7 +20,7 @@ Anaconda Prompt input:	pip install django
 method:  in Anaconda Prompt console
 cd your_project_folder    ex:	cd \lms2024fall 
 you will find requirements.txt
-Anaconda Prompt input:	pip install -r requirments.txt
+Anaconda Prompt input:	pip install -r requirements.txt
 
 7. initial database  (Initialize the database)
 Anaconda Prompt input:	python manage.py migrate
