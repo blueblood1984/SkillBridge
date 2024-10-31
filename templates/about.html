@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    
+    {% block title_name %}
+        
+    {% endblock title_name %}
+        
+{% endblock title %}
+    
+{% block body_content %}
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div class="ml-5"> 
+            <h4>About</h4>
+            <br>
+            <br>
+            <h4>This is a test project with Django</h4>
+        </div> 
+        <div style="position: fixed; bottom: 20px; right: 0px; width: 100px; height: 150px; overflow: hidden;">
+            <img src="{% static 'images/dove.gif' %}"
+                 style="position: absolute; width: 50px; animation: fly 10s linear infinite; animation-delay: 0s;">
+            <img src="{% static 'images/dove.gif' %}"
+                 style="position: absolute; width: 50px; animation: fly 10s linear infinite; animation-delay: 3.3s;">
+            <img src="{% static 'images/dove.gif' %}" 
+                 style="position: absolute; width: 50px; animation: fly 10s linear infinite; animation-delay: 6.6s;">
+        </div>
+
+        <!-- 内联样式定义动画 -->
+        <style>
+            @keyframes fly {
+                0% {
+                    transform: translateY(0); /* 初始位置 */
+                }
+                25% {
+                    transform: translate(20px, -20px); /* 向右上角飞 */
+                }
+                50% {
+                    transform: translate(100px, 0); /* 向右飞 */
+                }
+                75% {
+                    transform: translate(50px, 50px); /* 向右下角飞 */
+                }
+                100% {
+                    transform: translateY(0); /* 返回初始位置 */
+                }
+            }
+        </style>                  
+    </div>
+
+{% endblock body_content %}
