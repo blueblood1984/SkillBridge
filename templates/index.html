@@ -4,117 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        
+
         {% block title %}
-            LCMS - Home
+            SkillBridge - Home
         {% endblock title %}
-        
+
     </title>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Raleway&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/master.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Raleway&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/master.css' %}"/>
     <style>
         html, body {
-            height: 100%; 
+            height: 100%;
             margin: 0;
         }
-        
+
         body {
             background-image: url("{% static 'images/back.jpg' %}");
-            background-size: cover; 
-            background-repeat: no-repeat; 
-            background-attachment: fixed; 
-            background-position: center; 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
         }
+
         .index-image {
             background-color: rgba(255, 255, 255, 0.4);
         }
-        
+
+        .skillbridge-description {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+        }
+
     </style>
 </head>
 <body>
-    <div class="index-image">
-        <div class="container py-5">
-            <div class="row align-items-center py-5">
+<div class="index-image">
+    <div class="container py-5">
+        <div class="row align-items-center py-5">
             <div class="col-lg-6">
-                <h1 class="display-4">Learning Course Management System</h1>
-                <p class="lead text-muted mb-0">Practice Project</p>
-                <p><a href="{% url 'courses:list' %}" class="btn btn-primary btn-lg index-button">View All Courses</a></p>
+                <h1 class="display-4">SkillBridge</h1>
+                <p class="lead text-muted mb-0">Bridging the Digital Divide through E-Learning</p>
+                <p><a href="{% url 'courses:list' %}" class="btn btn-primary btn-lg index-button">View All Courses</a>
+                </p>
             </div>
-            <div class="col-lg-6 d-none d-lg-block"><img src="{% static 'images/learn.png' %}" alt="" class="img-fluid"></div>
+            <div class="col-lg-6 d-none d-lg-block"><img src="{% static 'images/learn.png' %}" alt="" class="img-fluid">
+            </div>
+            <div class="container skillbridge-description mt-5">
+                <h2>What's SkillBridge</h2>
+                <p>In today's digital age, acquiring essential skills is crucial for personal and professional
+                    advancement. However,
+                    individuals in underserved and economically disadvantaged regions often face significant
+                    barriers to accessing
+                    quality education and skill development. SkillBridge is an innovative e-learning platform
+                    designed to address
+                    these challenges by providing comprehensive training in computer literacy and practical
+                    skills.</p>
+                <p>SkillBridge offers a scalable, user-friendly, and secure learning environment that empowers users
+                    to progress
+                    through a diverse range of courses, from foundational digital literacy to advanced technical
+                    competencies. This
+                    platform is not only a resource for skill acquisition but also a stepping stone towards improved
+                    employment
+                    opportunities and personal empowerment.</p>
+
+                <h2>What SkillBridge Can Do</h2>
+                <ul class="feature-list">
+                    <li><strong>Course Management:</strong> An intuitive interface for users to easily navigate and
+                        manage their
+                        learning paths.
+                    </li>
+                    <li><strong>Interactive Quizzes:</strong> Engaging assessments that reinforce knowledge and
+                        enhance learning
+                        retention.
+                    </li>
+                    <li><strong>Certification:</strong> Recognizable credentials upon course completion, boosting
+                        employability and
+                        confidence.
+                    </li>
+                    <li><strong>Progress Tracking:</strong> Tools to monitor learning advancements, ensuring users
+                        stay motivated
+                        and on track.
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
-    <style>
 
-        .animation-container {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-            z-index: -1;
-        }
+<style>
 
-        .circle, .square, .triangle {
-            position: absolute;
+    .animation-container {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .circle, .square, .triangle {
+        position: absolute;
+        opacity: 1;
+        animation: move 12s linear infinite;
+        transform-origin: center;
+    }
+
+    .circle {
+        width: 80px;
+        height: 80px;
+        background-color: rgba(255, 100, 100, 1);
+        border-radius: 50%;
+        bottom: -80px;
+    }
+
+
+    .square {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(100, 255, 100, 1);
+        bottom: -100px;
+    }
+
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 100px solid rgba(100, 100, 255, 1);
+        bottom: -100px;
+    }
+
+
+    @keyframes move {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
             opacity: 1;
-            animation: move 12s linear infinite;
-            transform-origin: center;
         }
-
-        .circle {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(255, 100, 100, 1);
-            border-radius: 50%;
-            bottom: -80px;
+        50% {
+            transform: translateY(-150px) translateX(50px) rotate(180deg);
+            opacity: 0.6;
         }
-
-
-        .square {
-            width: 100px;
-            height: 100px;
-            background-color: rgba(100, 255, 100, 1);
-            bottom: -100px;
+        100% {
+            transform: translateY(-300px) translateX(100px) rotate(360deg);
+            opacity: 0.2;
         }
+    }
+</style>
 
-
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 100px solid rgba(100, 100, 255, 1);
-            bottom: -100px;
-        }
-
-
-        @keyframes move {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-150px) translateX(50px) rotate(180deg);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-300px) translateX(100px) rotate(360deg);
-                opacity: 0.2;
-            }
-        }
-    </style>
-
-    <div class="animation-container">
-        <div class="circle" style="left: 15%; animation-delay: 0s;"></div>
-        <div class="square" style="left: 35%; animation-delay: 2s;"></div>
-        <div class="triangle" style="left: 55%; animation-delay: 4s;"></div>
-        <div class="circle" style="left: 75%; animation-delay: 1s;"></div>
-        <div class="square" style="left: 90%; animation-delay: 3s;"></div>
-    </div>
+<div class="animation-container">
+    <div class="circle" style="left: 15%; animation-delay: 0s;"></div>
+    <div class="square" style="left: 35%; animation-delay: 2s;"></div>
+    <div class="triangle" style="left: 55%; animation-delay: 4s;"></div>
+    <div class="circle" style="left: 75%; animation-delay: 1s;"></div>
+    <div class="square" style="left: 90%; animation-delay: 3s;"></div>
+</div>
 </body>
 </html>
