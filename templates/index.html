@@ -6,7 +6,7 @@
     <title>
         
         {% block title %}
-            LCMS - Home
+            SkillBridge - Home
         {% endblock title %}
         
     </title>
@@ -31,7 +31,28 @@
         .index-image {
             background-color: rgba(255, 255, 255, 0.4);
         }
-        
+          .skillbridge-description {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+            font-family: 'Raleway', 'sans-serif';
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -39,11 +60,49 @@
         <div class="container py-5">
             <div class="row align-items-center py-5">
             <div class="col-lg-6">
-                <h1 class="display-4">Learning Course Management System</h1>
+                <h1 class="display-4">SkillBridge</h1>
                 <p class="lead text-muted mb-0">Practice Project</p>
                 <p><a href="{% url 'courses:list' %}" class="btn btn-info btn-lg index-button">View All Courses</a></p>
             </div>
             <div class="col-lg-6 d-none d-lg-block"><img src="{% static 'images/learn.png' %}" alt="" class="img-fluid"></div>
+            </div>
+                        <div class="container skillbridge-description mt-5">
+                <h2>What's SkillBridge</h2>
+                <p>In today's digital age, acquiring essential skills is crucial for personal and professional
+                    advancement. However,
+                    individuals in underserved and economically disadvantaged regions often face significant
+                    barriers to accessing
+                    quality education and skill development. SkillBridge is an innovative e-learning platform
+                    designed to address
+                    these challenges by providing comprehensive training in computer literacy and practical
+                    skills.</p>
+                <p>SkillBridge offers a scalable, user-friendly, and secure learning environment that empowers users
+                    to progress
+                    through a diverse range of courses, from foundational digital literacy to advanced technical
+                    competencies. This
+                    platform is not only a resource for skill acquisition but also a stepping stone towards improved
+                    employment
+                    opportunities and personal empowerment.</p>
+
+                <h2>What SkillBridge Can Do</h2>
+                <ul class="feature-list">
+                    <li><strong>Course Management:</strong> An intuitive interface for users to easily navigate and
+                        manage their
+                        learning paths.
+                    </li>
+                    <li><strong>Interactive Quizzes:</strong> Engaging assessments that reinforce knowledge and
+                        enhance learning
+                        retention.
+                    </li>
+                    <li><strong>Certification:</strong> Recognizable credentials upon course completion, boosting
+                        employability and
+                        confidence.
+                    </li>
+                    <li><strong>Progress Tracking:</strong> Tools to monitor learning advancements, ensuring users
+                        stay motivated
+                        and on track.
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
