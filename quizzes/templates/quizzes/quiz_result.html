@@ -1,0 +1,13 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+Quiz Result
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h2>{{ quiz.title }}</h2>
+    <p>You Score: {{ transcript.score }}</p>
+    <a href="{% url 'courses:detail' pk=quiz.course_id %}" class="btn btn-info">Back Course Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'page_base.html' %}
+{% load bootstrap4 %}
+
+{% block main_content %}
+  <div class="container">
+    <h1>Quiz</h1>
+
+
+    {% if user.user_type == 2 %}
+        <form method="POST" action="{% url 'quizzes:create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {{ form.name.errors }}
+            <input type="submit" value="Submit" class="btn btn-secondary btn-lg">
+        </form>
+    {% else %}
+        <div class="jumbotron">
+            <h2>You cannot create a quiz</h2>
+        </div>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

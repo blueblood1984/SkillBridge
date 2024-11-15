@@ -1,0 +1,152 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+    Transcript Trade Chart
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">{{ quiz.title }}</dd>
+
+            <dt class="col-sm-3">Teacher</dt>
+            <dd class="col-sm-9">
+                {{ quiz.course.teacher }}
+            </dd>
+
+            <dt class="col-sm-3">Join Num</dt>
+            <dd class="col-sm-9">{{ transcripts.count }}</dd>
+
+            <dt class="col-sm-3 text-truncate">Date Range</dt>
+            <dd class="col-sm-9">{{ quiz.start_time }} - {{ quiz.end_time }}</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">
+                {{ quiz.description }}
+            </dd>
+        </dl>
+        <div>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div id="right" style="height: 400px"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+            integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="application/javascript">
+        const chartDom2 = document.getElementById('right');
+        const myChart2 = echarts.init(chartDom2);
+        let option2;
+
+        option2 = {
+            backgroundColor: '#F9F9F9',
+            title: {
+              text: "Right and Wrong Distribution Chart",
+                left: "center"
+            },
+            legend: {
+                left: "right",
+                orient: "vertical"
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: '#FFFFFF',
+                borderColor: '#E0E0E0',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333',
+                },
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ wrong_x|safe }},
+                axisLabel: {
+                    textStyle: {
+                        color: '#666'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                minInterval: 1,
+                 axisLabel: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#666'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ccc'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#ddd'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: "Correct",
+                    data: {{ correct_y|safe }},
+                    type: 'bar',
+                    barWidth: '30%',
+                    itemStyle: {
+                        color: '#4CAF50',
+                        borderRadius: [10, 10, 0, 0]
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            color: '#3e8e41'
+                        }
+                    },
+                },
+                {
+                    name: "Wrong",
+                    data: {{ wrong_y|safe }},
+                    type: 'bar',
+                    barWidth: '30%',
+                    itemStyle: {
+                        color: '#F44336',
+                        borderRadius: [10, 10, 0, 0]
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            color: '#d32f2f'
+                        }
+                    },
+                },
+            ]
+        };
+
+        option2 && myChart2.setOption(option2);
+    </script>
+{% endblock %}

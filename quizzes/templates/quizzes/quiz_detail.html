@@ -1,0 +1,69 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+    Quiz Detail
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h1>{{ quiz.title }}</h1>
+    <h4>Course: {{ quiz.course.course_name }}</h4>
+    <h5>Time Range: {{ quiz.start_time }} ~ {{ quiz.end_time }}</h5>
+    <p>Description: {{ quiz.description }}</p>
+    <div>
+        {% if quiz.course.teacher == request.user %}
+            <a class="btn btn-info" href="{% url 'quizzes:transcript_list' quiz_id=quiz.id %}">Transcripts</a>
+            <a class="btn btn-info" href="{% url 'quizzes:rw_distribution_chart' quiz_id=quiz.id %}">Right And Wrong Distribution Chart</a>
+            <a class="btn btn-info" href="{% url 'quizzes:grade_distribution_chart' quiz_id=quiz.id %}">Grade Distribution Chart</a>
+
+            <a class="btn btn-warning" href="{% url 'quizzes:update' pk=quiz.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'quizzes:delete' pk=quiz.id %}">Delete</a>
+
+        {% elif quiz.is_start and not transcript %}
+
+            <a class="btn btn-success" href="{% url 'quizzes:start_quiz' pk=quiz.id %}">Start</a>
+        {% elif show_transcript %}
+            <a class="btn btn-info" href="{% url 'quizzes:my_transcript' quiz_id=quiz.pk %}">My Transcript</a>
+        {% endif %}
+
+    </div>
+    <hr>
+    {% if quiz.course.teacher == request.user %}
+        <div class="card">
+            <div class="card-header">
+                Questions
+                {% if quiz.course.teacher == request.user and not transcript %}
+                    <a href="{% url 'quizzes:add_questions' quiz_id=quiz.pk %}" class="btn btn-sm btn-success"
+                       style="float: right">Add
+                        Question</a>
+                {% endif %}
+            </div>
+
+            <div class="list-group">
+                {% for question in quiz.questions.all %}
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 align-items-center">
+                            <span class="badge badge-danger badge-pill">Q {{ question.no }}</span>
+                            <h5 class="mb-1">{{ question.desc }}</h5>
+                            {% if quiz.course.teacher == request.user and not transcript %}
+                            <button onclick="location.href = '{% url 'quizzes:delete_questions' pk=question.id %}'"
+                                    class="btn btn-sm btn-danger" style="margin-left: auto">Delete
+                            </button>
+                            {% endif %}
+                        </div>
+                        {% for choice in question.choices.all %}
+                            <small>{{ forloop.counter }}. {{ choice.text }} {% if choice.is_correct %}
+                                <i class="fa fa-check-circle" style="color: green" aria-hidden="true"></i>
+                            {% endif %}</small> <br>
+                        {% endfor %}
+                        {% if not question.choices.all %}
+                            <small>No Choices;</small>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

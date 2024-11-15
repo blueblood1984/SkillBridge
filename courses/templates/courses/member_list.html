@@ -1,0 +1,47 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+    Transcript List
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">{{ course.course_name }}</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">
+                {{ course.course_description }}
+            </dd>
+        </dl>
+
+        <div class="card mt-3">
+        <div class="card-header">
+            Member List
+        </div>
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+
+        {% for member in members %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ member.student.username }}</td>
+                <td>{{ member.student.first_name }}</td>
+                <td>{{ member.student.last_name }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+
+
+    </div>
+{% endblock %}

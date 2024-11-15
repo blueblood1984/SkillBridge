@@ -1,0 +1,32 @@
+{% extends 'page_base.html' %}
+{% load bootstrap4 %}
+{% block title_name %}
+APPEND QUESTIONS
+{% endblock %}
+
+{% block main_content %}
+  <div class="container">
+    <h1>Question</h1>
+
+
+    {% if user.user_type == 2 %}
+        <form method="POST" action="{% url 'quizzes:add_questions' quiz_id=quiz.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {{ form.name.errors }}
+             {{ choice_formset.management_form }}
+            {% for choice_form in choice_formset %}
+                <h5>Choice {{ forloop.counter }}</h5>
+                <div class="choice">
+                    {% bootstrap_form choice_form %}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Submit" class="btn btn-secondary btn-lg">
+        </form>
+    {% else %}
+        <div class="jumbotron">
+            <h2>You cannot create a question</h2>
+        </div>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+    Transcript RW Chart
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">{{ quiz.title }}</dd>
+
+            <dt class="col-sm-3">Teacher</dt>
+            <dd class="col-sm-9">
+                {{ quiz.course.teacher }}
+            </dd>
+
+            <dt class="col-sm-3">Join Num</dt>
+            <dd class="col-sm-9">{{ transcripts.count }}</dd>
+
+            <dt class="col-sm-3 text-truncate">Date Range</dt>
+            <dd class="col-sm-9">{{ quiz.start_time }} - {{ quiz.end_time }}</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">
+                {{ quiz.description }}
+            </dd>
+        </dl>
+        <div>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-2">
+                <div class="card">
+                    <div id="left" style="height: 400px"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+            integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="application/javascript">
+        const chartDom = document.getElementById('left');
+        const myChart = echarts.init(chartDom);
+        let option;
+
+        option = {
+            backgroundColor: '#F9F9F9',
+            title: {
+              text: "Grade distribution chart",
+                left: "center"
+            },
+             tooltip: {
+                trigger: 'axis',
+                backgroundColor: '#FFFFFF',
+                borderColor: '#E0E0E0',
+                borderWidth: 1,
+                textStyle: {
+                    color: '#333',
+                },
+                formatter: '{b} : {c0} ',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ score_x|safe }},
+                axisLine: {
+                    lineStyle: {
+                        color: '#C0C0C0'
+                    }
+                },
+                axisTick: { show: false },
+                axisLabel: {
+                    color: '#666'
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: {
+            lineStyle: {
+                color: '#C0C0C0'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#E0E0E0',
+                type: 'dashed'
+            }
+        },
+        axisLabel: {
+            color: '#666'
+        }
+            },
+            series: [
+                {
+                    data: {{ score_y|safe }},
+                    type: 'bar',
+                    barWidth: '40%',
+                    itemStyle: {
+                        color: '#3398DB',
+                        borderRadius: [5, 5, 0, 0]
+                    }
+                },
+                {
+                    data: {{ score_y|safe }},
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: '#FF6F61',
+                        width: 2
+                    },
+                    itemStyle: {
+                        color: '#FF6F61'
+                    }
+                },
+            ]
+        };
+
+        option && myChart.setOption(option);
+    </script>
+{% endblock %}

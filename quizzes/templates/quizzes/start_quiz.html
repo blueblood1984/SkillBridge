@@ -1,0 +1,50 @@
+{% extends 'page_base.html' %}
+
+{% block title_name %}
+    Quiz {{ quiz.title }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Quiz</dt>
+            <dd class="col-sm-9">{{ quiz.title }}</dd>
+
+            <dt class="col-sm-3">Course</dt>
+            <dd class="col-sm-9">
+                {{ quiz.course }}
+            </dd>
+        </dl>
+        {% if quiz.is_start %}
+            <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for question in quiz.questions.all %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Q{{ question.no }}.
+                            {{ question.description }}</h5>
+                        <div class="row">
+                            {% for choice in question.choices.all %}
+                                <div class="col-6">
+                                    <label><input name="{{ question.no }}" type="radio" value="{{ choice.id }}"
+                                                  required>
+                                        {{ choice.text }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+            {% else %}
+            <div>
+            Quiz is inValid
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
